@@ -3,17 +3,16 @@ package com.dev.cinema.dao;
 import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.util.HibernateUtil;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import java.util.List;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             Long movieId = (Long) session.save(movie);
             transaction.commit();
@@ -24,13 +23,16 @@ public class MovieDaoImpl implements MovieDao {
                 transaction.rollback();
             }
             throw new RuntimeException("Can't insert Movie entity", e);
-        } finally {
-            session.close();
         }
     }
 
     @Override
+
     public List<Movie> getAll() {
-       return null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Movie", Movie.class).list();
+        } catch (Exception e) {
+            throw new RuntimeException("Can't get Movies", e);
+        }
     }
 }
