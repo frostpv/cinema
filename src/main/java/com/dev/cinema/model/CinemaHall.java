@@ -1,5 +1,10 @@
 package com.dev.cinema.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "cinema_hall")
 public class CinemaHall {
     private Long id;
     private int capacity;
