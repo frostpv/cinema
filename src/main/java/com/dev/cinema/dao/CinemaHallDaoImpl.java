@@ -1,12 +1,14 @@
 package com.dev.cinema.dao;
 
 import com.dev.cinema.exceptions.DataProcessingException;
+import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+@Dao
 public class CinemaHallDaoImpl implements CinemaHallDao {
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
