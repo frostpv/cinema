@@ -21,14 +21,14 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<MovieSession> movieSessionQuery =
                     session.createQuery("from MovieSession where movie.id = :movieId "
-                    + "and :showTime between :beginFindTime and :endFindTime", MovieSession.class);
+                    + " and showTime between :begin and :end ", MovieSession.class);
             movieSessionQuery.setParameter("movieId", movieId);
-            movieSessionQuery.setParameter("beginFindTime", beginFindTime);
-            movieSessionQuery.setParameter("endFindTime", endFindTime);
+            movieSessionQuery.setParameter("begin", beginFindTime);
+            movieSessionQuery.setParameter("end", endFindTime);
             return movieSessionQuery.getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie sessions by movie id "
-                    + movieId + " at date: " + date.toString() + "from DB", e);
+                    + movieId + " at date: " + date.toString() + " from DB", e);
         }
     }
 

@@ -3,8 +3,12 @@ package com.dev.cinema;
 import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
+import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
+import com.dev.cinema.service.MovieSessionService;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
@@ -22,5 +26,14 @@ public class Main {
                 (CinemaHallService) injector.getInstance(CinemaHallService.class);
         cinemaHallService.add(cinemaHall);
         cinemaHallService.getAll();
+        MovieSession movieSession = new MovieSession();
+        movieSession.setCinemaHall(cinemaHall);
+        movieSession.setMovie(movie);
+        movieSession.setShowTime(LocalDateTime.of(2020, 10, 6, 10, 50));
+        MovieSessionService movieSessionService =
+                (MovieSessionService) injector.getInstance(MovieSessionService.class);
+        movieSessionService.add(movieSession);
+        movieSessionService.findAvailableSessions(1L, LocalDate.of(2020, 10, 6));
+        movieSessionService.findAvailableSessions(1L, LocalDate.now().plusMonths(1));
     }
 }
