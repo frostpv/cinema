@@ -2,10 +2,12 @@ package com.dev.cinema.service;
 
 import com.dev.cinema.dao.MovieSessionDao;
 import com.dev.cinema.lib.Inject;
+import com.dev.cinema.lib.Service;
 import com.dev.cinema.model.MovieSession;
 import java.time.LocalDate;
 import java.util.List;
 
+@Service
 public class MovieSessionServiceImpl implements MovieSessionService {
     @Inject
     MovieSessionDao movieSessionDao;
