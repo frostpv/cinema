@@ -33,16 +33,16 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
     }
 
     @Override
-    public MovieSession add(MovieSession moveSession) {
+    public MovieSession add(MovieSession movieSession) {
         Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Long movieId = (Long) session.save(moveSession);
+            Long movieId = (Long) session.save(movieSession);
             transaction.commit();
-            moveSession.setId(movieId);
-            return moveSession;
+            movieSession.setId(movieId);
+            return movieSession;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
