@@ -16,15 +16,13 @@ import org.hibernate.query.Query;
 public class MovieSessionDaoImpl implements MovieSessionDao {
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
-        LocalDateTime beginFindTime = date.atStartOfDay();
-        LocalDateTime endFindTime = date.atTime(LocalTime.MAX);
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<MovieSession> movieSessionQuery =
                     session.createQuery("from MovieSession where movie.id = :movieId "
                     + " and showTime between :begin and :end ", MovieSession.class);
             movieSessionQuery.setParameter("movieId", movieId);
-            movieSessionQuery.setParameter("begin", beginFindTime);
-            movieSessionQuery.setParameter("end", endFindTime);
+            movieSessionQuery.setParameter("begin", date.atStartOfDay());
+            movieSessionQuery.setParameter("end", date.atTime(LocalTime.MAX));
             return movieSessionQuery.getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie sessions by movie id "
