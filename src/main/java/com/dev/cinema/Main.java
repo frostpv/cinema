@@ -57,5 +57,14 @@ public class Main {
         } catch (AuthenticationException e) {
             System.out.println(e);
         }
+        User user2 = new User();
+        user2.setEmail("frostpv@gmail.com");
+        user2.setPassword("123");
+        try {
+            System.out.println(authenticationService.register(user2.getEmail(), user2.getPassword()));
+        } catch (AuthenticationException e) {
+            System.out.println(e);
+        }
+
     }
 }
