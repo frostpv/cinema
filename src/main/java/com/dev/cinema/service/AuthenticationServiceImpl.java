@@ -31,9 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (userFromDb.isPresent()) {
             throw new AuthenticationException("This email " + email + " is already used");
         }
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
+        User user = new User(email, password);
         return userService.add(user);
     }
 

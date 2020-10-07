@@ -44,9 +44,7 @@ public class Main {
         AuthenticationService authenticationService =
                 (AuthenticationService) Injector.getInstance("com.dev.cinema")
                         .getInstance(AuthenticationService.class);
-        User user = new User();
-        user.setEmail("frostpv@gmail.com");
-        user.setPassword("123");
+        User user = new User("frostpv@gmail.com", "123");
         try {
             System.out.println(authenticationService.register(user.getEmail(), user.getPassword()));
         } catch (AuthenticationException e) {
@@ -57,9 +55,7 @@ public class Main {
         } catch (AuthenticationException e) {
             System.out.println(e);
         }
-        User user2 = new User();
-        user2.setEmail("frostpv@gmail.com");
-        user2.setPassword("123");
+        User user2 = new User("frostpv@gmail.com", "123");
         try {
             System.out.println(authenticationService.register(user2.getEmail(), user2.getPassword()));
         } catch (AuthenticationException e) {
