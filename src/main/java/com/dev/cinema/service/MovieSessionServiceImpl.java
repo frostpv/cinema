@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class MovieSessionServiceImpl implements MovieSessionService {
     @Inject
-    MovieSessionDao movieSessionDao;
+    private MovieSessionDao movieSessionDao;
 
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
