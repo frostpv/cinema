@@ -13,8 +13,8 @@ public class HashUtil {
             MessageDigest messageDigest = MessageDigest.getInstance(HASH_ALGORITHM);
             messageDigest.update(salt);
             byte[] digest = messageDigest.digest(password.getBytes());
-            for (byte b : digest) {
-                hashedPassword.append(String.format("%02x", b));
+            for (byte byt : digest) {
+                hashedPassword.append(String.format("%02x", byt));
             }
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Couldn't hash password", e);
