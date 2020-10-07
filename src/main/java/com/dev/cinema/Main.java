@@ -57,7 +57,8 @@ public class Main {
         }
         User user2 = new User("frostpv@gmail.com", "123");
         try {
-            System.out.println(authenticationService.register(user2.getEmail(), user2.getPassword()));
+            System.out.println(authenticationService.register(user2.getEmail(),
+                    user2.getPassword()));
         } catch (AuthenticationException e) {
             System.out.println(e);
         }
