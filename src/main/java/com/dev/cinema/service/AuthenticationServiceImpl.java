@@ -24,10 +24,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User register(String email, String password) throws AuthenticationException {
-        Optional<User> userFromDb = userService.findByEmail(email);
-        if (userFromDb.isPresent()) {
-            throw new AuthenticationException("This email " + email + " is already used");
-        }
         User user = new User(email, password);
         return userService.add(user);
     }
