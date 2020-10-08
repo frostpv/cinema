@@ -19,7 +19,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 && isValid(userFromDb.get().getPassword(), password, userFromDb.get().getSalt())) {
             return userFromDb.get();
         }
-        throw new AuthenticationException("Incorrect email or password " + email);
+        throw new AuthenticationException("Incorrect email " + email + "or password");
     }
 
     @Override
