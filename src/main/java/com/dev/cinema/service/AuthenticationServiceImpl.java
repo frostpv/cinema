@@ -23,7 +23,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User register(String email, String password) throws AuthenticationException {
+    public User register(String email, String password) {
         User user = new User(email, password);
         return userService.add(user);
     }
