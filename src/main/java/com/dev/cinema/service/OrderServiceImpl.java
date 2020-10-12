@@ -19,9 +19,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order completeOrder(List<Ticket> tickets, User user) {
         Order order = new Order(tickets, user, LocalDateTime.now());
-        orderDao.add(order);
         shoppingCartService.clear(shoppingCartService.getByUser(user));
-        return null;
+        return  orderDao.add(order);
     }
 
     @Override
