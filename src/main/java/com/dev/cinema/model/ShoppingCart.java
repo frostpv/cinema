@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class ShoppingCart {
     @Id
     private Long id;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     private List<Ticket> tickets;
     @OneToOne
     @MapsId
