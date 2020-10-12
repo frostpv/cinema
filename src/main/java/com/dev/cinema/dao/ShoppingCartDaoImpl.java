@@ -7,7 +7,6 @@ import com.dev.cinema.model.User;
 import com.dev.cinema.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 @Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
@@ -61,8 +60,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't update shopping cart " + shoppingCart
-                    + " in data", e);
+            throw new DataProcessingException("Can't update shopping cart " + shoppingCart, e);
         } finally {
             if (session != null) {
                 session.close();
