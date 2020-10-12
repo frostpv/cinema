@@ -1,6 +1,7 @@
 package com.dev.cinema.dao;
 
 import com.dev.cinema.exceptions.DataProcessingException;
+import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.Order;
 import com.dev.cinema.model.User;
 import com.dev.cinema.util.HibernateUtil;
@@ -8,6 +9,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+@Dao
 public class OrderDaoImpl implements OrderDao {
     @Override
     public Order add(Order order) {
