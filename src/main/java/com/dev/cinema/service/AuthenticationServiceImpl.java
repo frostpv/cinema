@@ -11,6 +11,8 @@ import java.util.Optional;
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
     private UserService userService;
+    @Inject
+    private ShoppingCartService shoppingCartService;
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
@@ -25,7 +27,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public User register(String email, String password) {
         User user = new User(email, password);
-        return userService.add(user);
+        User userFromDb = userService.add(user);
+        shoppingCartService.registerNewShoppingCart(userFromDb);
+        return userFromDb;
     }
 
     private boolean isValid(String userPassword, String password, byte[] salt) {
