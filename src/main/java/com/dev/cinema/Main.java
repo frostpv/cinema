@@ -2,7 +2,11 @@ package com.dev.cinema;
 
 import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.lib.Injector;
-import com.dev.cinema.model.*;
+import com.dev.cinema.model.CinemaHall;
+import com.dev.cinema.model.Movie;
+import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.model.ShoppingCart;
+import com.dev.cinema.model.User;
 import com.dev.cinema.service.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
