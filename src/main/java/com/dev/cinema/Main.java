@@ -67,6 +67,12 @@ public class Main {
         System.out.println(user);
         user = userService.findByEmail("frostpv@gmail.com").get();
         shoppingCartService.addSession(movieSession, user);
+        MovieSession movieSession1 = new MovieSession();
+        movieSession1.setShowTime(LocalDateTime.now());
+        movieSession1.setMovie(movie);
+        movieSession1.setCinemaHall(cinemaHall);
+        movieSessionService.add(movieSession1);
+        shoppingCartService.addSession(movieSession1, user);
         System.out.println(shoppingCartService.getByUser(user));
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
         orderService.completeOrder(shoppingCart.getTickets(), user);
