@@ -11,6 +11,7 @@ import com.dev.cinema.service.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
+import com.dev.cinema.service.OrderService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
@@ -30,6 +31,9 @@ public class Main {
     private static ShoppingCartService shoppingCartService =
             (ShoppingCartService) Injector.getInstance("com.dev.cinema")
                     .getInstance(ShoppingCartService.class);
+    private static OrderService orderService =
+            (OrderService) Injector.getInstance("com.dev.cinema")
+                    .getInstance(OrderService.class);
 
     public static void main(String[] args) {
         Movie movie = new Movie();
@@ -63,9 +67,16 @@ public class Main {
         System.out.println(user);
         user = userService.findByEmail("frostpv@gmail.com").get();
         shoppingCartService.addSession(movieSession, user);
+        MovieSession movieSession1 = new MovieSession();
+        movieSession1.setShowTime(LocalDateTime.now());
+        movieSession1.setMovie(movie);
+        movieSession1.setCinemaHall(cinemaHall);
+        movieSessionService.add(movieSession1);
+        shoppingCartService.addSession(movieSession1, user);
         System.out.println(shoppingCartService.getByUser(user));
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
-        shoppingCartService.clear(shoppingCart);
+        orderService.completeOrder(shoppingCart.getTickets(), user);
         System.out.println(shoppingCart);
+        System.out.println(orderService.getOrderHistory(user));
     }
 }
