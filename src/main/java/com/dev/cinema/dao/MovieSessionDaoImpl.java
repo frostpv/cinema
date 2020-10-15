@@ -7,14 +7,18 @@ import com.dev.cinema.util.HibernateUtil;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 @Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
+    private static final Logger logger = Logger.getLogger(MovieSessionDaoImpl.class);
+
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
+        logger.info("Trying find available sessions");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<MovieSession> movieSessionQuery =
                     session.createQuery("from MovieSession where movie.id = :movieId "
@@ -31,6 +35,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
 
     @Override
     public MovieSession add(MovieSession movieSession) {
+        logger.info("Trying insert moveSession in to data");
         Transaction transaction = null;
         Session session = null;
         try {

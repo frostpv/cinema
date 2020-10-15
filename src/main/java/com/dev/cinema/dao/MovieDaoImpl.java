@@ -5,13 +5,17 @@ import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.util.HibernateUtil;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
+    private static final Logger logger = Logger.getLogger(MovieDaoImpl.class);
+
     @Override
     public Movie add(Movie movie) {
+        logger.info("Trying insert Movie entity in to database");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -35,6 +39,7 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public List<Movie> getAll() {
+        logger.info("Trying get all movies");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("FROM Movie", Movie.class).list();
         }
