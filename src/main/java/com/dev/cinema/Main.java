@@ -16,8 +16,10 @@ import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import org.apache.log4j.Logger;
 
 public class Main {
+    private static Logger logger = Logger.getLogger(Main.class);
     private static Injector injector = Injector.getInstance("com.dev.cinema");
     private static CinemaHallService cinemaHallService =
             (CinemaHallService) injector.getInstance(CinemaHallService.class);
@@ -55,16 +57,17 @@ public class Main {
         movieSessionService.findAvailableSessions(1L, LocalDate.now().plusMonths(1));
         User user = new User("frostpv@gmail.com", "123");
         try {
-            System.out.println(authenticationService.register(user.getEmail(), user.getPassword()));
+            logger.info("Register user with: "
+                    + authenticationService.register(user.getEmail(), user.getPassword()));
         } catch (AuthenticationException e) {
-            System.out.println(e);
+            logger.error("Register error" + e);
         }
         try {
-            System.out.println(authenticationService.login(user.getEmail(), user.getPassword()));
+            logger.info("Authentication user with: "
+                    + authenticationService.login(user.getEmail(), user.getPassword()));
         } catch (AuthenticationException e) {
-            System.out.println(e);
+            logger.info("Authentication error: " + e);
         }
-        System.out.println(user);
         user = userService.findByEmail("frostpv@gmail.com").get();
         shoppingCartService.addSession(movieSession, user);
         MovieSession movieSession1 = new MovieSession();
@@ -73,10 +76,11 @@ public class Main {
         movieSession1.setCinemaHall(cinemaHall);
         movieSessionService.add(movieSession1);
         shoppingCartService.addSession(movieSession1, user);
-        System.out.println(shoppingCartService.getByUser(user));
+        logger.info("Get user shopping cart: " + shoppingCartService.getByUser(user));
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
         orderService.completeOrder(shoppingCart.getTickets(), user);
-        System.out.println(shoppingCart);
-        System.out.println(orderService.getOrderHistory(user));
+        logger.info("Check user shopping cart should be empty: "
+                + shoppingCartService.getByUser(user).getTickets());
+        logger.info("Show user order list: " + orderService.getOrderHistory(user));
     }
 }

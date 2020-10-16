@@ -5,11 +5,14 @@ import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.util.HibernateUtil;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 @Dao
 public class CinemaHallDaoImpl implements CinemaHallDao {
+    private static final Logger logger = Logger.getLogger(CinemaHallDaoImpl.class);
+
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
         Transaction transaction = null;
@@ -19,6 +22,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
             transaction = session.beginTransaction();
             session.save(cinemaHall);
             transaction.commit();
+            logger.info("Insert CinemaHall " + cinemaHall + " in to database");
             return cinemaHall;
         } catch (Exception e) {
             if (transaction != null) {
@@ -39,5 +43,4 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
             return session.createQuery("FROM CinemaHall ", CinemaHall.class).list();
         }
     }
-
 }
