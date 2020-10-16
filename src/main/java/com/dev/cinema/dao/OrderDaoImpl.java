@@ -16,6 +16,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order add(Order order) {
+        logger.info("Trying insert order entity into the database");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -39,7 +40,6 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getOrderHistory(User user) {
-        logger.info("Trying get order history");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("SELECT DISTINCT o FROM Order o "
                     + "LEFT JOIN FETCH o.tickets "

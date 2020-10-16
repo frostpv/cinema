@@ -15,6 +15,7 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
+        logger.info("Trying insert Movie entity in to database");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -38,7 +39,6 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public List<Movie> getAll() {
-        logger.info("Trying get all movies");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("FROM Movie", Movie.class).list();
         }

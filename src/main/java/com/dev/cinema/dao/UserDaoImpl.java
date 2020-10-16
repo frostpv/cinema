@@ -16,6 +16,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User add(User user) {
+        logger.info("Trying to add user into the database");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -38,7 +39,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        logger.info("Trying to find user in the database");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<User> userQuery =
                     session.createQuery("from User where email = :email", User.class);
