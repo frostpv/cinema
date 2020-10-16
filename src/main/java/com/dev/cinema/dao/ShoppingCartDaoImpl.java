@@ -15,7 +15,6 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {
-        logger.info("Trying insert ShoppingCart entity into the database");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -23,6 +22,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             transaction = session.beginTransaction();
             session.save(shoppingCart);
             transaction.commit();
+            logger.info("Insert ShoppingCart " + shoppingCart + " into the database");
             return shoppingCart;
         } catch (Exception e) {
             if (transaction != null) {

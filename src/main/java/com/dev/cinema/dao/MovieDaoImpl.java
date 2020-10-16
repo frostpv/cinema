@@ -15,7 +15,6 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        logger.info("Trying insert Movie entity in to database");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -23,6 +22,7 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
+            logger.info("Insert Movie " + movie + " entity in to database");
             return movie;
         } catch (Exception e) {
             if (transaction != null) {

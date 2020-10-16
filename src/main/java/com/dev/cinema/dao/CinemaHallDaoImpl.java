@@ -15,7 +15,6 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
 
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
-        logger.info("Trying insert CinemaHall in to database");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -23,6 +22,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
             transaction = session.beginTransaction();
             session.save(cinemaHall);
             transaction.commit();
+            logger.info("Insert CinemaHall " + cinemaHall + " in to database");
             return cinemaHall;
         } catch (Exception e) {
             if (transaction != null) {
