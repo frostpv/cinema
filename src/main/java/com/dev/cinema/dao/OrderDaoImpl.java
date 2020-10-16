@@ -16,7 +16,6 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order add(Order order) {
-        logger.info("Trying insert order entity into the database");
         Transaction transaction = null;
         Session session = null;
         try {

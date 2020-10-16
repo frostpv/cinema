@@ -15,7 +15,6 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
 
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
-        logger.info("Trying insert CinemaHall in to database");
         Transaction transaction = null;
         Session session = null;
         try {
