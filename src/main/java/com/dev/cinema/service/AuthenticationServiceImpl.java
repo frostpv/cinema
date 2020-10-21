@@ -4,9 +4,9 @@ import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.model.User;
 import com.dev.cinema.util.HashUtil;
 import java.util.Optional;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserService userService;
     private final ShoppingCartService shoppingCartService;
