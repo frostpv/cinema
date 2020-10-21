@@ -2,13 +2,6 @@ package com.dev.cinema.config;
 
 import java.util.Properties;
 import javax.sql.DataSource;
-import com.dev.cinema.model.CinemaHall;
-import com.dev.cinema.model.Movie;
-import com.dev.cinema.model.MovieSession;
-import com.dev.cinema.model.Order;
-import com.dev.cinema.model.ShoppingCart;
-import com.dev.cinema.model.Ticket;
-import com.dev.cinema.model.User;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,9 +12,9 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @Configuration
 @PropertySource("classpath:db.properties")
-@ComponentScan (basePackages = {
+@ComponentScan(basePackages = {
         "com.dev.cinema.dao",
-        "com.dev.cinema.service"
+        "com.dev.cinema.service",
 })
 public class AppConfig {
     private final Environment environment;
@@ -48,14 +41,7 @@ public class AppConfig {
         properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         localSessionFactoryBean.setHibernateProperties(properties);
-        localSessionFactoryBean.setAnnotatedClasses(User.class);
-        localSessionFactoryBean.setAnnotatedClasses(CinemaHall.class);
-        localSessionFactoryBean.setAnnotatedClasses(Movie.class);
-        localSessionFactoryBean.setAnnotatedClasses(Order.class);
-        localSessionFactoryBean.setAnnotatedClasses(ShoppingCart.class);
-        localSessionFactoryBean.setAnnotatedClasses(Ticket.class);
-        localSessionFactoryBean.setAnnotatedClasses(MovieSession.class);
+        localSessionFactoryBean.setPackagesToScan("com.dev.cinema.model");
         return localSessionFactoryBean;
     }
 }
-

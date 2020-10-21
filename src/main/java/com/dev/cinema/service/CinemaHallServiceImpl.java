@@ -9,6 +9,10 @@ import java.util.List;
 public class CinemaHallServiceImpl implements CinemaHallService {
     private CinemaHallDao cinemaHallDao;
 
+    public CinemaHallServiceImpl(CinemaHallDao cinemaHallDao) {
+        this.cinemaHallDao = cinemaHallDao;
+    }
+
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
         return cinemaHallDao.add(cinemaHall);
