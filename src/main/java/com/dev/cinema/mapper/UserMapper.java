@@ -13,8 +13,8 @@ public class UserMapper {
 
     public User dtoToUser(UserRequestDto userRequestDto) {
         User user = new User();
-        user.setEmail(userRequestDto.getEmail());
         user.setPassword(userRequestDto.getPassword());
+        user.setEmail(userRequestDto.getEmail());
         return user;
     }
 }
