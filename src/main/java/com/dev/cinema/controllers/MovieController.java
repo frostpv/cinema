@@ -4,7 +4,12 @@ import com.dev.cinema.dto.movie.MovieRequestDto;
 import com.dev.cinema.dto.movie.MovieResponseDto;
 import com.dev.cinema.mapper.MovieMapper;
 import com.dev.cinema.service.MovieService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/movies")
