@@ -15,7 +15,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/")
-    public String doUserRegister(){
-       return "need impl";
+    public String doUserRegister() {
+        return "need impl";
     }
 }
