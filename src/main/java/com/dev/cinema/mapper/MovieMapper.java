@@ -15,7 +15,7 @@ public class MovieMapper {
         return movie;
     }
 
-    public MovieResponseDto MovieToDto(Movie movie) {
-        return new MovieResponseDto(movie.getId(),movie.getTitle(),movie.getDescription());
+    public MovieResponseDto movieToDto(Movie movie) {
+        return new MovieResponseDto(movie.getId(), movie.getTitle(), movie.getDescription());
     }
 }

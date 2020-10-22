@@ -1,6 +1,7 @@
 package com.dev.cinema.controllers;
 
 import com.dev.cinema.dto.movie.MovieRequestDto;
+import com.dev.cinema.dto.movie.MovieResponseDto;
 import com.dev.cinema.mapper.MovieMapper;
 import com.dev.cinema.service.MovieService;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +17,13 @@ public class MovieController {
         this.movieMapper = movieMapper;
     }
 
-
     @PostMapping("/")
     public void addMovie(@RequestBody MovieRequestDto movieRequestDto) {
         movieService.add(movieMapper.dtoToMovie(movieRequestDto));
     }
 
-    @GetMapping("/")
-    public void getMovie() {
-
+    @GetMapping("/{movieId}")
+    public MovieResponseDto getMovie(@PathVariable Long movieId) {
+        return movieMapper.movieToDto(movieService.getById(movieId));
     }
 }

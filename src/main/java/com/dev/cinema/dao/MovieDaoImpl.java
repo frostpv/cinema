@@ -48,4 +48,11 @@ public class MovieDaoImpl implements MovieDao {
             return session.createQuery("FROM Movie", Movie.class).list();
         }
     }
+
+    @Override
+    public Movie getById(Long movieId) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(Movie.class, movieId);
+        }
+    }
 }
