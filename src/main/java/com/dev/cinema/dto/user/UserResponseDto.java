@@ -1,9 +1,11 @@
 package com.dev.cinema.dto.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class UserResponseDto {
-    private int id;
+    private Long id;
     private String email;
 }
