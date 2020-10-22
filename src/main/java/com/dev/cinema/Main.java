@@ -1,7 +1,7 @@
 package com.dev.cinema;
 
+import com.dev.cinema.config.AppConfig;
 import com.dev.cinema.exceptions.AuthenticationException;
-import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
@@ -17,45 +17,35 @@ import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
     private static Logger logger = Logger.getLogger(Main.class);
-    private static Injector injector = Injector.getInstance("com.dev.cinema");
-    private static CinemaHallService cinemaHallService =
-            (CinemaHallService) injector.getInstance(CinemaHallService.class);
-    private static MovieSessionService movieSessionService =
-            (MovieSessionService) injector.getInstance(MovieSessionService.class);
-    private static UserService userService = (UserService) Injector.getInstance("com.dev.cinema")
-            .getInstance(UserService.class);
-    private static AuthenticationService authenticationService =
-            (AuthenticationService) Injector.getInstance("com.dev.cinema")
-                    .getInstance(AuthenticationService.class);
-    private static ShoppingCartService shoppingCartService =
-            (ShoppingCartService) Injector.getInstance("com.dev.cinema")
-                    .getInstance(ShoppingCartService.class);
-    private static OrderService orderService =
-            (OrderService) Injector.getInstance("com.dev.cinema")
-                    .getInstance(OrderService.class);
 
     public static void main(String[] args) {
+        AnnotationConfigApplicationContext context
+                = new AnnotationConfigApplicationContext(AppConfig.class);
         Movie movie = new Movie();
         movie.setTitle("Fast and Furious");
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
+        MovieService movieService = context.getBean(MovieService.class);
         movieService.add(movie);
         movieService.getAll().forEach(System.out::println);
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(14);
         cinemaHall.setDescription("Green zone");
+        CinemaHallService cinemaHallService = context.getBean(CinemaHallService.class);
         cinemaHallService.add(cinemaHall);
         cinemaHallService.getAll();
         MovieSession movieSession = new MovieSession();
         movieSession.setCinemaHall(cinemaHall);
         movieSession.setMovie(movie);
         movieSession.setShowTime(LocalDateTime.of(2020, 10, 6, 10, 50));
+        MovieSessionService movieSessionService = context.getBean(MovieSessionService.class);
         movieSessionService.add(movieSession);
         movieSessionService.findAvailableSessions(1L, LocalDate.of(2020, 10, 6));
         movieSessionService.findAvailableSessions(1L, LocalDate.now().plusMonths(1));
         User user = new User("frostpv@gmail.com", "123");
+        AuthenticationService authenticationService = context.getBean(AuthenticationService.class);
         try {
             logger.info("Register user with: "
                     + authenticationService.register(user.getEmail(), user.getPassword()));
@@ -68,7 +58,9 @@ public class Main {
         } catch (AuthenticationException e) {
             logger.info("Authentication error: " + e);
         }
+        UserService userService = context.getBean(UserService.class);
         user = userService.findByEmail("frostpv@gmail.com").get();
+        ShoppingCartService shoppingCartService = context.getBean(ShoppingCartService.class);
         shoppingCartService.addSession(movieSession, user);
         MovieSession movieSession1 = new MovieSession();
         movieSession1.setShowTime(LocalDateTime.now());
@@ -78,6 +70,7 @@ public class Main {
         shoppingCartService.addSession(movieSession1, user);
         logger.info("Get user shopping cart: " + shoppingCartService.getByUser(user));
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
+        OrderService orderService = context.getBean(OrderService.class);
         orderService.completeOrder(shoppingCart.getTickets(), user);
         logger.info("Check user shopping cart should be empty: "
                 + shoppingCartService.getByUser(user).getTickets());
