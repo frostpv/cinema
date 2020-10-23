@@ -22,7 +22,6 @@ public class AuthenticationController {
     @SneakyThrows
     @PostMapping("/registration")
     public void doUserRegister(@RequestBody UserRequestDto userRequestDto) {
-        User user = userMapper.dtoToUser(userRequestDto);
-        authenticationService.register(user.getEmail(), user.getPassword());
+        authenticationService.register(userRequestDto.getEmail(), userRequestDto.getPassword());
     }
 }
