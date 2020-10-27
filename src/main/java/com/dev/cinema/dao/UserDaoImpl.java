@@ -1,7 +1,6 @@
 package com.dev.cinema.dao;
 
 import com.dev.cinema.exceptions.DataProcessingException;
-import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.User;
 import java.util.Optional;
 import org.apache.log4j.Logger;

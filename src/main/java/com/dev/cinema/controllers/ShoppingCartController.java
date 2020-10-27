@@ -1,8 +1,7 @@
 package com.dev.cinema.controllers;
 
-import com.dev.cinema.dto.shoppingCart.ShoppingCartResponseDto;
+import com.dev.cinema.dto.shoppingcart.ShoppingCartResponseDto;
 import com.dev.cinema.mapper.ShoppingCartMapper;
-import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.service.MovieSessionService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
@@ -29,12 +28,14 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/movie-sessions")
-    public void addMovieSession(@RequestParam Long userId, @RequestParam Long sessionId){
-        shoppingCartService.addSession(movieSessionService.findById(sessionId), userService.findById(userId));
+    public void addMovieSession(@RequestParam Long userId, @RequestParam Long sessionId) {
+        shoppingCartService.addSession(movieSessionService.findById(sessionId),
+                userService.findById(userId));
     }
 
     @GetMapping
     public ShoppingCartResponseDto getByUserId(@RequestParam Long userId) {
-        return shoppingCartMapper.shoppingCartToDto(shoppingCartService.getByUser(userService.findById(userId)));
+        return shoppingCartMapper
+                .shoppingCartToDto(shoppingCartService.getByUser(userService.findById(userId)));
     }
 }

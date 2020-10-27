@@ -5,8 +5,6 @@ import com.dev.cinema.model.MovieSession;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-
-import com.dev.cinema.model.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

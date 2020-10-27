@@ -1,11 +1,11 @@
 package com.dev.cinema.mapper;
 
-import com.dev.cinema.dto.shoppingCart.ShoppingCartResponseDto;
+import com.dev.cinema.dto.shoppingcart.ShoppingCartResponseDto;
 import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.Ticket;
-import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ShoppingCartMapper {
