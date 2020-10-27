@@ -1,6 +1,7 @@
 package com.dev.cinema.dao;
 
 import com.dev.cinema.exceptions.DataProcessingException;
+import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.User;
 import java.util.Optional;
 import org.apache.log4j.Logger;
@@ -49,6 +50,13 @@ public class UserDaoImpl implements UserDao {
                     session.createQuery("from User where email = :email", User.class);
             userQuery.setParameter("email", email);
             return userQuery.uniqueResultOptional();
+        }
+    }
+
+    @Override
+    public User findById(Long userId) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(User.class, userId);
         }
     }
 }
