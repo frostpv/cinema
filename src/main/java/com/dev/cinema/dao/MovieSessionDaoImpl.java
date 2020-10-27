@@ -5,6 +5,8 @@ import com.dev.cinema.model.MovieSession;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+
+import com.dev.cinema.model.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -58,6 +60,13 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             if (session != null) {
                 session.close();
             }
+        }
+    }
+
+    @Override
+    public MovieSession findById(Long sessionId) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(MovieSession.class, sessionId);
         }
     }
 }
