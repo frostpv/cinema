@@ -18,6 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(getEncoder())
                 .withUser("vasya").password(getEncoder().encode("123")).roles("USER");
     }
+
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
@@ -30,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();
     }
+
     @Bean
     public PasswordEncoder getEncoder() {
         return new BCryptPasswordEncoder();

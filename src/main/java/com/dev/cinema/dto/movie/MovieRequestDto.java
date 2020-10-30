@@ -1,7 +1,7 @@
 package com.dev.cinema.dto.movie;
 
-import lombok.Data;
 import javax.validation.constraints.NotNull;
+import lombok.Data;
 
 @Data
 public class MovieRequestDto {
