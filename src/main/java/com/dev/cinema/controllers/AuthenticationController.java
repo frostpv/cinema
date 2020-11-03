@@ -1,7 +1,8 @@
 package com.dev.cinema.controllers;
 
-import com.dev.cinema.dto.user.UserRequestDto;
+import com.dev.cinema.dto.user.UserRegistrationDto;
 import com.dev.cinema.service.AuthenticationService;
+import javax.validation.Valid;
 import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class AuthenticationController {
 
     @SneakyThrows
     @PostMapping("/registration")
-    public void doUserRegister(@RequestBody UserRequestDto userRequestDto) {
+    public void doUserRegister(@RequestBody @Valid UserRegistrationDto userRequestDto) {
         authenticationService.register(userRequestDto.getEmail(), userRequestDto.getPassword());
     }
 }
