@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/movie-sessions")
 public class MovieSessionController {
@@ -27,7 +29,7 @@ public class MovieSessionController {
     }
 
     @PostMapping
-    public void addMovieSession(@RequestBody MovieSessionRequestDto requestDto) {
+    public void addMovieSession(@RequestBody @Valid MovieSessionRequestDto requestDto) {
         movieSessionService.add(movieSessionMapper.dtoToMovieSession(requestDto));
     }
 
