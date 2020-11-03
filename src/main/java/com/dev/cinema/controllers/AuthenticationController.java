@@ -2,12 +2,11 @@ package com.dev.cinema.controllers;
 
 import com.dev.cinema.dto.user.UserRegistrationDto;
 import com.dev.cinema.service.AuthenticationService;
+import javax.validation.Valid;
 import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 @RestController
 public class AuthenticationController {
