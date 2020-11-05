@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
         "com.dev.cinema.service",
         "com.dev.cinema.mapper",
         "com.dev.cinema.security",
+        "com.dev.cinema.util",
 })
 public class AppConfig {
     private final Environment environment;
